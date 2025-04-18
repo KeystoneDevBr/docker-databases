@@ -11,7 +11,7 @@ git clone https://github.com/KeystoneDevBr/docker-databases.git
 cd docker-databases/
 
 # Start the containers
-docker compose build && docker compose up
+docker-compose up --build
 
 ```
 
