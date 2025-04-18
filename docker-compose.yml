@@ -38,25 +38,25 @@ services:
     ####################################################################################################
     # phpMyAdmin for MariaDB
     # ####################################################################################################
-    # mariadb_admin:
-    #     build: ./.docker/mariadb_admin
-    #     container_name: example_mariadb_admin
-    #     restart: unless-stopped
-    #     ports:
-    #         - "8080:80"
-    #         - "4443:443"
-    #     environment:
-    #         PMA_HOST: mariadb
-    #         PMA_PORT: 33306
-    #         MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}   
-    #         TZ: 'America/Sao_Paulo'
-    #         APP_HOST: ${APP_HOST}          
-    #     #volumes:
-    #     # - ./developer/mariadb_admin/sessions:/sessions
-    #     depends_on:
-    #         - mariadb
-    #     networks:
-    #         - private_network
+    mariadb_admin:
+        build: ./.docker/mariadb_admin
+        container_name: example_mariadb_admin
+        restart: unless-stopped
+        ports:
+            - "8888:80"
+            - "44443:443"
+        environment:
+            PMA_HOST: mariadb
+            PMA_PORT: 33306
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}   
+            TZ: 'America/Sao_Paulo'
+            APP_HOST: ${APP_HOST}          
+        #volumes:
+        # - ./developer/mariadb_admin/sessions:/sessions
+        depends_on:
+            - mariadb
+        networks:
+            - private_network
 
     #####################################################################################################
     # DATABASE (MariaDB)
@@ -74,9 +74,10 @@ services:
             - ./.docker/mariadb/sql:/docker-entrypoint-initdb.d
         environment:
             MYSQL_DATABASE: ${DB_DATABASE:-cursobdii}
-            MYSQL_USER: ${DB_USERNAME:-username}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+            #MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
             MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}
+            MYSQL_USER: ${DB_USERNAME:-username}
         networks:
             - private_network
 

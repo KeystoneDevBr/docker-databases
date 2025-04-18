@@ -26,4 +26,4 @@ ADD default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 
 RUN a2enmod ssl && a2ensite default-ssl.conf
 
-EXPOSE 8080
+EXPOSE 8888
