@@ -35,113 +35,116 @@ services:
         networks:
             - private_network
 
-    ####################################################################################################
-    # phpMyAdmin for MariaDB
     # ####################################################################################################
-    mariadb_admin:
-        build: ./.docker/mariadb_admin
-        container_name: example_mariadb_admin
-        restart: unless-stopped
-        ports:
-            - "8888:80"
-            - "44443:443"
-        environment:
-            PMA_HOST: mariadb
-            PMA_PORT: 33306
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}   
-            TZ: 'America/Sao_Paulo'
-            APP_HOST: ${APP_HOST}          
-        #volumes:
-        # - ./developer/mariadb_admin/sessions:/sessions
-        depends_on:
-            - mariadb
-        networks:
-            - private_network
+    # # phpMyAdmin for MariaDB
+    # # ####################################################################################################
+    # mariadb_admin:
+    #     build: ./.docker/mariadb_admin
+    #     container_name: example_mariadb_admin
+    #     restart: unless-stopped
+    #     ports:
+    #         - "8888:80"
+    #         - "44443:443"
+    #     environment:
+    #         PMA_HOST: mariadb
+    #         PMA_PORT: 33306
+    #         MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}   
+    #         TZ: 'America/Sao_Paulo'
+    #         APP_HOST: ${APP_HOST}          
+    #     #volumes:
+    #     # - ./developer/mariadb_admin/sessions:/sessions
+    #     depends_on:
+    #         - mariadb
+    #     networks:
+    #         - private_network
 
-    #####################################################################################################
-    # DATABASE (MariaDB)
-    #####################################################################################################
-    mariadb:
-        image: mariadb:11.7
-        container_name: example_mariadb
-        restart: unless-stopped
-        ports:
-            - 33306:33306
-        volumes:
-            - ./.docker/mariadb/untracked/data:/var/lib/mysql
-            - ./.docker/mariadb/untracked/logs:/var/log/mysql
-            - ./.docker/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
-            - ./.docker/mariadb/sql:/docker-entrypoint-initdb.d
-        environment:
-            MYSQL_DATABASE: ${DB_DATABASE:-cursobdii}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-            #MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-            MYSQL_USER: ${DB_USERNAME:-username}
-        networks:
-            - private_network
+    # #####################################################################################################
+    # # DATABASE (MariaDB)
+    # #####################################################################################################
+    # mariadb:
+    #     image: mariadb:11.7
+    #     container_name: example_mariadb
+    #     restart: unless-stopped
+    #     ports:
+    #         - 33306:33306
+    #     volumes:
+    #         - ./.docker/mariadb/untracked/data:/var/lib/mysql
+    #         - ./.docker/mariadb/untracked/logs:/var/log/mysql
+    #         - ./.docker/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+    #         - ./.docker/mariadb/sql:/docker-entrypoint-initdb.d
+    #     environment:
+    #         MYSQL_DATABASE: ${DB_DATABASE:-cursobdii}
+    #         MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+    #         #MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    #         MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+    #         MYSQL_USER: ${DB_USERNAME:-username}
+    #     networks:
+    #         - private_network
 
-    ####################################################################################################
-    # phpMyAdmin for MySQL
-    ####################################################################################################
-    mysql_admin:
-        build: ./.docker/mysql_admin
-        container_name: example_mysql_admin
-        restart: unless-stopped
-        ports:
-            - "8080:80"
-            - "4443:443"
-        environment:
-            PMA_HOST: mysql
-            PMA_PORT: 3306
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}   
-            TZ: 'America/Sao_Paulo'
-            APP_HOST: ${APP_HOST}          
-        #volumes:
-        # - ./developer/mysql_admin/sessions:/sessions
-        depends_on:
-            - mysql
-        networks:
-            - private_network
-    ####################################################################################################
-    # DATABASE (MySQL) - Intentionally Older Version and with Empty Password
-    ####################################################################################################
-    mysql:
-        image: mysql:9.3 # mysql:5.7
-        container_name: example_mysql
-        restart: unless-stopped
-        ports:
-            - 3306:3306
-        volumes:
-            - ./.docker/mysql/untracked/data:/var/lib/mysql
-            - ./.docker/mysql/untracked/logs:/var/log/mysql
-            - ./.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-            - ./.docker/mysql/sql:/docker-entrypoint-initdb.d
-        environment:
-            MYSQL_DATABASE: ${DB_DATABASE:-cursobdii}
-            MYSQL_ROOT_PASSWORD: "" #${DB_PASSWORD:-root}
-            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-            MYSQL_USER: ${DB_USERNAME:-username}
-            TZ: 'America/Sao_Paulo'
-        networks:
-            - private_network
+    # ####################################################################################################
+    # # phpMyAdmin for MySQL
+    # ####################################################################################################
+    # mysql_admin:
+    #     build: ./.docker/mysql_admin
+    #     container_name: example_mysql_admin
+    #     restart: unless-stopped
+    #     ports:
+    #         - "8080:80"
+    #         - "4443:443"
+    #     environment:
+    #         PMA_HOST: mysql
+    #         PMA_PORT: 3306
+    #         MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}   
+    #         TZ: 'America/Sao_Paulo'
+    #         APP_HOST: ${APP_HOST}          
+    #     #volumes:
+    #     # - ./developer/mysql_admin/sessions:/sessions
+    #     depends_on:
+    #         - mysql
+    #     networks:
+    #         - private_network
+    # ####################################################################################################
+    # # DATABASE (MySQL) - Intentionally Older Version and with Empty Password
+    # ####################################################################################################
+    # mysql:
+    #     image: mysql:9.3 # mysql:5.7
+    #     container_name: example_mysql
+    #     restart: unless-stopped
+    #     ports:
+    #         - 3306:3306
+    #     volumes:
+    #         - ./.docker/mysql/untracked/data:/var/lib/mysql
+    #         - ./.docker/mysql/untracked/logs:/var/log/mysql
+    #         - ./.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    #         - ./.docker/mysql/sql:/docker-entrypoint-initdb.d
+    #     environment:
+    #         MYSQL_DATABASE: ${DB_DATABASE:-cursobdii}
+    #         MYSQL_ROOT_PASSWORD: "" #${DB_PASSWORD:-root}
+    #         MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    #         MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+    #         MYSQL_USER: ${DB_USERNAME:-username}
+    #         TZ: 'America/Sao_Paulo'
+    #     networks:
+    #         - private_network
 
-    ####################################################################################################
-    # pgAdmin
-    ####################################################################################################
+    # ####################################################################################################
+    # # pgAdmin
+    # ####################################################################################################
     pgadmin:
         image: dpage/pgadmin4:latest
         container_name: example_pgadmin
         restart: unless-stopped
         ports:
-            - 5050:80
+            - 5050:443
         volumes:
-            - ./.docker/pgsql/:/var/lib/pgadmin
+            - ./.docker/pgadmin/:/var/lib/pgadmin
+            - ./.docker/pgadmin/certs/certificate.cert:/certs/server.cert
+            - ./.docker/pgadmin/certs/certificate.key:/certs/server.key
         environment:
             - PGADMIN_DEFAULT_EMAIL=${DBPSQL_USERNAME:-admin@local.com}
             - PGADMIN_DEFAULT_PASSWORD=${DBPSQL_PASSWORD:-root}
             - POSTGRES_DB=${DBPSQL_DATABASE:-cursobdii}
+            - PGADMIN_ENABLE_TLS=True
         depends_on:
             - pgsql
         networks:
@@ -168,27 +171,27 @@ services:
     ###################################################################################################
     # SQL Server
     ###################################################################################################  
-    sqlsrv:
-        build: ./.docker/sqlsrv
-        restart: unless-stopped
-        container_name: example_sqlsrv
-        environment:
-            ACCEPT_EULA: 'Y'
-            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Senha@Forte}
-            MSSQL_TCP_PORT: ${MSSQL_TCP_PORT:-1433} 
-            MSSQL_DATA_DIR: /var/opt/mssql/data
-            MSSQL_PID: 'Developer' 
-            #MSSQL_PID: "Express"
-            MSSQL_LC_COLLATION: "Latin1_General_CI_AS"
-            MSSQL_LANG: "pt_br"
-        ports: 
-            - "1433:1433"
-        volumes:
-            - ./.docker/sqlsrv/data/data:/var/opt/mssql/data
-            - ./.docker/sqlsrv/data/log:/var/opt/mssql/log
-            - ./.docker/sqlsrv/data/secrets:/var/opt/mssql/secrets 
-        networks:
-            - private_network
+    # sqlsrv:
+    #     build: ./.docker/sqlsrv
+    #     restart: unless-stopped
+    #     container_name: example_sqlsrv
+    #     environment:
+    #         ACCEPT_EULA: 'Y'
+    #         MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Senha@Forte}
+    #         MSSQL_TCP_PORT: ${MSSQL_TCP_PORT:-1433} 
+    #         MSSQL_DATA_DIR: /var/opt/mssql/data
+    #         MSSQL_PID: 'Developer' 
+    #         #MSSQL_PID: "Express"
+    #         MSSQL_LC_COLLATION: "Latin1_General_CI_AS"
+    #         MSSQL_LANG: "pt_br"
+    #     ports: 
+    #         - "1433:1433"
+    #     volumes:
+    #         - ./.docker/sqlsrv/data/data:/var/opt/mssql/data
+    #         - ./.docker/sqlsrv/data/log:/var/opt/mssql/log
+    #         - ./.docker/sqlsrv/data/secrets:/var/opt/mssql/secrets 
+    #     networks:
+    #         - private_network
             
     ###################################################################################################
     # Docker Workspace Network
