@@ -78,13 +78,14 @@ echo '<!DOCTYPE html>
         <div style="font-size: 14px; font-weight: normal; margin-top: 10px;">
             Click in the botom to see more information about the procedure to use this docker images
         </div>
-        <a href="https://github.com/KeystoneDevBr/docker-databases" target="_blank">More information..</a>
-    </div>
+            <a href="https://github.com/KeystoneDevBr/docker-databases" target="_blank">More information..</a>
+        </div>
     <div class="container">
         <div class="box" onclick="window.location.href=\'./phpinfo.php\'">PHP Info</div>
-        <div class="box" onclick="window.location.href=\'https://127.0.0.1:4443\'">MYSQL Admin</div>
+        <div class="box" onclick="window.location.href=\'https://127.0.0.1:4443\'">MySQL Admin</div>
         <div class="box" onclick="window.location.href=\'https://127.0.0.1:44443\'">MariaDB Admin</div>
         <div class="box" onclick="window.location.href=\'http://127.0.0.1:5050\'">PostgreSQL</div>
+        <div class="box" onclick="window.location.href=\'http://127.0.0.1/sqlsrv.php\'">SQL Server</div>
     </div>
 </body>
 </html>';
