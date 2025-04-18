@@ -43,7 +43,7 @@ ___
 
 ### PostgreSQL Amdin Page
 
-Navigate to http://127.0.0.1:5050/ to access the PgAdmin to manage PostgreSQL Database.
+Navigate to https://127.0.0.1:5050/ to access the PgAdmin to manage PostgreSQL Database.
 **User: admin@local.com, Passowd: web**
 
 ![](./postgreSQL.png)
