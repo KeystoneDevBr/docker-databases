@@ -20,7 +20,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -out /etc/ssl/certs/nginx-selfsigned.crt
 
 # Timezone Config
-ENV TZ=${TZ}
+ENV TZ='$TZ'
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #Teste de execução a cada 2 minutos
