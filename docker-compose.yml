@@ -66,10 +66,10 @@ services:
         container_name: example_mariadb
         restart: unless-stopped
         ports:
-            - 3306:33306
+            - 33306:33306
         volumes:
-            - ./.docker/mariadb/data:/var/lib/mysql
-            - ./.docker/mariadb/logs:/var/log/mysql
+            - ./.docker/mariadb/untracked/data:/var/lib/mysql
+            - ./.docker/mariadb/untracked/logs:/var/log/mysql
             - ./.docker/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
             - ./.docker/mariadb/sql:/docker-entrypoint-initdb.d
         environment:
