@@ -84,8 +84,8 @@ echo '<!DOCTYPE html>
         <div class="box" onclick="window.location.href=\'./phpinfo.php\'">PHP Info</div>
         <div class="box" onclick="window.location.href=\'https://127.0.0.1:4443\'">MySQL Admin</div>
         <div class="box" onclick="window.location.href=\'https://127.0.0.1:44443\'">MariaDB Admin</div>
-        <div class="box" onclick="window.location.href=\'http://127.0.0.1:5050\'">PostgreSQL</div>
-        <div class="box" onclick="window.location.href=\'http://127.0.0.1/sqlsrv.php\'">SQL Server</div>
+        <div class="box" onclick="window.location.href=\'https://127.0.0.1:5050\'">PostgreSQL</div>
+        <div class="box" onclick="window.location.href=\'https://127.0.0.1/sqlsrv.php\'">SQL Server</div>
     </div>
 </body>
 </html>';
