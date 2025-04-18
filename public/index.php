@@ -82,7 +82,7 @@ echo '<!DOCTYPE html>
     </div>
     <div class="container">
         <div class="box" onclick="window.location.href=\'./phpinfo.php\'">PHP Info</div>
-        <div class="box" onclick="window.location.href=\'https://www.github.com\'">GitHub</div>
+        <div class="box" onclick="window.location.href=\'https://127.0.0.1:4443\'">MYSQL Admin</div>
         <div class="box" onclick="window.location.href=\'https://www.php.net\'">PHP</div>
     </div>
 </body>
