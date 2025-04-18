@@ -127,34 +127,17 @@ services:
         networks:
             - private_network
 
-    ###################################################################################################
-    # PostgreSQL
-    ###################################################################################################
-    pgsql:
-        image: postgres:latest
-        container_name: example_pgsql
-        restart: unless-stopped
-        ports:
-            - 5432:5432
-        volumes:
-            - ./.docker/pgsql/data:/var/lib/postgresql/data
-            - ./.docker/mysql/sql:/docker-entrypoint-initdb.d
-        environment:
-            - POSTGRES_USER=${DBPSQL_USERNAME:-username}
-            - POSTGRES_PASSWORD=${DBPSQL_PASSWORD:-root}
-            - POSTGRES_DB=${DBPSQL_DATABASE:-cursobdii}
-        networks:
-            - private_network
-
     ####################################################################################################
     # pgAdmin
     ####################################################################################################
     pgadmin:
-        image: dpage/pgadmin4
+        image: dpage/pgadmin4:latest
         container_name: example_pgadmin
         restart: unless-stopped
         ports:
             - 5050:80
+        volumes:
+            - ./.docker/pgsql/:/var/lib/pgadmin
         environment:
             - PGADMIN_DEFAULT_EMAIL=${DBPSQL_USERNAME:-admin@local.com}
             - PGADMIN_DEFAULT_PASSWORD=${DBPSQL_PASSWORD:-root}
@@ -163,34 +146,53 @@ services:
             - pgsql
         networks:
             - private_network
-     ####################################################################################################
+    ###################################################################################################
+    # PostgreSQL
+    ###################################################################################################
+    pgsql:
+        image: postgres:17.2
+        container_name: example_pgsql
+        restart: unless-stopped
+        ports:
+            - 5432:5432
+        volumes:
+            - ./.docker/pgsql/data:/var/lib/postgresql/data
+            - ./.docker/pgsql/sql:/docker-entrypoint-initdb.d
+        environment:
+            - POSTGRES_USER=${DBPSQL_USERNAME:-username}
+            - POSTGRES_PASSWORD=${DBPSQL_PASSWORD:-root}
+            - POSTGRES_DB=${DBPSQL_DATABASE:-cursobdii}
+        networks:
+            - private_network
+
+    ###################################################################################################
     # SQL Server
-    ####################################################################################################  
-    # sqlsrv:
-    #     build: ./developer/sqlsrv
-    #     restart: unless-stopped
-    #     container_name: example_sqlsrv_dev
-    #     environment:
-    #         ACCEPT_EULA: 'Y'
-    #         MSSQL_SA_PASSWORD: ${DB4_PASSWORD:-<YourStrong@Passw0rd>}
-    #         MSSQL_TCP_PORT: ${DB4_PORT:-1433} 
-    #         MSSQL_DATA_DIR: /var/opt/mssql/data
-    #         MSSQL_PID: 'Developer' 
-    #         #MSSQL_PID: "Express"
-    #         MSSQL_LC_COLLATION: "Latin1_General_CI_AS"
-    #         MSSQL_LANG: "pt_br"
-    #     ports: 
-    #         - "1433:1433"
-    #     volumes:
-    #         - ./developer/sqlsrv/data/data:/var/opt/mssql/data
-    #         - ./developer/sqlsrv/data/log:/var/opt/mssql/log
-    #         - ./developer/sqlsrv/data/secrets:/var/opt/mssql/secrets 
-    #     networks:
-    #         - private_network
+    ###################################################################################################  
+    sqlsrv:
+        build: ./.docker/sqlsrv
+        restart: unless-stopped
+        container_name: example_sqlsrv
+        environment:
+            ACCEPT_EULA: 'Y'
+            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Senha@Forte}
+            MSSQL_TCP_PORT: ${MSSQL_TCP_PORT:-1433} 
+            MSSQL_DATA_DIR: /var/opt/mssql/data
+            MSSQL_PID: 'Developer' 
+            #MSSQL_PID: "Express"
+            MSSQL_LC_COLLATION: "Latin1_General_CI_AS"
+            MSSQL_LANG: "pt_br"
+        ports: 
+            - "1433:1433"
+        volumes:
+            - ./.docker/sqlsrv/data/data:/var/opt/mssql/data
+            - ./.docker/sqlsrv/data/log:/var/opt/mssql/log
+            - ./.docker/sqlsrv/data/secrets:/var/opt/mssql/secrets 
+        networks:
+            - private_network
             
-    ####################################################################################################
+    ###################################################################################################
     # Docker Workspace Network
-    #################################################################################################### 
+    ################################################################################################### 
 networks:
     private_network:
         driver: bridge
