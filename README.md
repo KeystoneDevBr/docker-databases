@@ -41,7 +41,7 @@ Navigate to https://127.0.0.1:44443/ to access the PHP My Admin to manage MariaD
 
 ___
 
-### PostgreSQL Amdin Page
+### PostgreSQL Admin Page
 
 Navigate to https://127.0.0.1:5050/ to access the PgAdmin to manage PostgreSQL Database.
 **User: admin@local.com, Passowd: web**
@@ -50,7 +50,7 @@ Navigate to https://127.0.0.1:5050/ to access the PgAdmin to manage PostgreSQL D
 
 ___
 
-### SQL Server Amdin Page
+### SQL Server Admin Page
 
 Navigate to https://127.0.0.1/sqlsrv.php to read more information how to procedure to access the sql server,
 or access [.docker/sqlsrv/README.md](./.docker/sqlsrv/README.md)
