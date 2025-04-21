@@ -62,7 +62,7 @@ services:
     # DATABASE (MariaDB)
     #####################################################################################################
     mariadb:
-        image: mariadb:11.7
+        image: mariadb
         container_name: example_mariadb
         restart: unless-stopped
         ports:
@@ -107,7 +107,7 @@ services:
     # DATABASE (MySQL) - Intentionally Older Version and with Empty Password
     ####################################################################################################
     mysql:
-        image: mysql:9.3 # mysql:5.7
+        image: mysql:8.0.36 # mysql:5.7
         container_name: example_mysql
         restart: unless-stopped
         ports:

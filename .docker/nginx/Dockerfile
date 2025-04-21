@@ -1,4 +1,4 @@
-FROM nginx:1.27.0
+FROM nginx
 
 # Copia os arquivos de configuração
 ADD default.conf /etc/nginx/conf.d/default.conf
